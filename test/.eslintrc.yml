@@ -1,0 +1,9 @@
+env:
+  es6: true
+  mocha: true
+
+globals:
+  chai: true
+  expect: true
+
+# vim: ft=yaml
