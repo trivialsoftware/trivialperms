@@ -6,11 +6,54 @@
 
 import _ from 'lodash';
 
-import TPBase from './base';
-
 //----------------------------------------------------------------------------------------------------------------------
 
-class TPGroup extends TPBase {
+class TPGroup {
+    constructor(name, permissions, manager)
+    {
+        this.name = name;
+        this.permissions = permissions || [];
+        this.manager = manager;
+
+        // Ensure our permissions are unique
+        this.permissions = _.uniq(this.permissions);
+    } // end constructor
+
+    hasPerm(perm, obj)
+    {
+        return !!_.find(this.permissions, (permission) =>
+        {
+            if(permission == '*/*')
+            {
+                return true;
+            }
+            else if(permission.match(/^.*\/\*/))
+            {
+                return !!permission.match(new RegExp(`^${ obj }/`));
+            }
+            else if(permission.match(/^\*\/.*/))
+            {
+                return !!permission.match(new RegExp(`^.*/${ perm }$`));
+            }
+            else
+            {
+                return !!permission.match(new RegExp(`^${ obj }/${ perm }$`));
+            } // end if
+        });
+    } // end hasPerm
+
+    addPerm(perm, obj)
+    {
+        this.permissions.push(`${ obj }/${ perm }`);
+
+        // Ensure our permissions are unique
+        this.permissions = _.uniq(this.permissions);
+    } // end addPerm
+
+    removePerm(perm, obj)
+    {
+        return _.remove(this.permissions, (item) => item == `${ obj }/${ perm }`);
+    } // end removePerm
 } // end TPGroup
 
 //----------------------------------------------------------------------------------------------------------------------

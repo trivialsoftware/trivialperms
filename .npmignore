@@ -10,10 +10,10 @@ node_modules
 
 # Ignore source files
 .babelrc
-.eslintrc
+.editorconfig
 .gitignore
-*.yml
+**.yml
 Gruntfile.js
 src
 examples
-tests
+test

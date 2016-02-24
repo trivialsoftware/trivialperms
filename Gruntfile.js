@@ -45,11 +45,11 @@ module.exports = function(grunt)
         eslint: {
             src: {
                 src: ['Gruntfile.js', 'src/**/*.js'],
-                options: { configFile: '.eslintrc' }
+                options: { configFile: '.eslintrc.yml' }
             },
             test: {
                 src: ['test/**/*.js'],
-                options: { configFile: 'test/.eslintrc' }
+                options: { configFile: 'test/.eslintrc.yml' }
             }
         }
     });
