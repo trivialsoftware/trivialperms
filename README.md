@@ -149,16 +149,170 @@ This should make it very easy to integrate with a database library, for example.
 
 ### Users
 
-TBD.
+You are expected to be providing your own user objects. Generally, this would come from either an authentication system, 
+or a database of some kind. Because of this, we did not want to force you to preload all your users; rather, you provide
+TrivialPermissions with the object when you want to check permissions. By default, TrivialPermissions expect an object that looks like this:
+
+```javascript
+{
+	permissions: [...],  // A list of permissions strings
+	groups: [...],       // A list of group names (strings)
+	...
+}
+```
+
+If you want to change that, you can with `setUserMapping()`.
 
 #### Setting Mapping
 
-TBD.
+* `setUserMapping({ permissions: '...', groups: '...' })` - Returns nothing.
+
+If your user object has it's permissions or groups under a different key name, you can change what TrivialPermissions
+looks for using this method. Simply pass an object with the `permissions` and/or `groups` key(s) to map to your object's structure.
+
+```javascript
+var tp = require('../dist/trivialperms');
+
+var user = {
+	name: "John Snow",
+	allowed: ["Foo/canView", "Bar/canView"],
+	roles: ["Posters"]
+};
+
+// This must be done before your attempt to use the permission system.
+tp.setUserMapping({ permissions: 'allowed', groups: 'roles' });
+```
 
 #### Checking Permissions
 
-TBD.
+* `hasPerm(user, perm, object)` - Returns true if the user has that permission on that object, otherwise false.
+
+This is the heart of the system: checking permissions. It's very simply; you pass the user object, the permission descriptor (string), and the object descriptor (string). Here are a few examples:
+
+```javascript
+var tp = require('../dist/trivialperms');
+
+// Setup
+var loading = tp.loadGroups([
+    {
+        name: "Administrators",
+        permissions: [
+            "*/*"
+        ]
+    },
+    {
+        name: "Authors",
+        permissions: [
+            "Posts/canView",
+            "Posts/canAdd",
+            "Posts/canEdit"
+        ]
+    },
+    {
+        name: "Users",
+        permissions: [
+            "Posts/canView"
+        ]
+    }
+]);
+
+// Define Users
+var batman = {
+    name: 'batman',
+    groups: ['Administrators']
+};
+
+var stark = {
+    name: 'tstark',
+    permissions: ['*/*'],
+    groups: ['Users']
+};
+
+var leo = {
+    name: 'lblume',
+    groups: ['Users']
+};
+
+// Wait until the loading is complete
+loading.then(() =>
+{
+    // Batman can edit posts
+    console.log(tp.hasPerm(batman, 'canEdit', 'Posts'));			// true
+    
+    // Tony Start can do anything
+    console.log(tp.hasPerm(stark, 'canEdit', 'Posts'));				// true
+    console.log(tp.hasPerm(stark, 'canGetAwayWith', 'Murder'));		// true
+    
+    // Leo can read posts
+    console.log(tp.hasPerm(leo, 'canView', 'Posts'));				// true
+    
+    // Leo can not edit posts
+    console.log(tp.hasPerm(leo, 'canEdit', 'Posts'));				// false
+});
+```
 
 ### Checking Group membership
 
-TBD.
+* `hasGroup(user, groupName)` - Returns true if the user is a member of the group and the group exists, otherwise false.
+
+Checking for group membership is also a very simple thing to do in TrivialPermissions. However, we add one aditional check
+about simply seeing if `groupName` is in the list of groups on the user: `hasGroup()` returns false for groups that have 
+not been defined, regardless of is the user has that group name in their list of groups.
+
+```javascript
+var tp = require('../dist/trivialperms');
+
+// Setup
+var loading = tp.loadGroups([
+    {
+        name: "Administrators",
+        permissions: [
+            "*/*"
+        ]
+    },
+    {
+        name: "Authors",
+        permissions: [
+            "Posts/canView",
+            "Posts/canAdd",
+            "Posts/canEdit"
+        ]
+    },
+    {
+        name: "Users",
+        permissions: [
+            "Posts/canView"
+        ]
+    }
+]);
+
+// Define Users
+var batman = {
+    name: 'batman',
+    groups: ['Administrators']
+};
+
+var stark = {
+    name: 'tstark',
+    permissions: ['*/*'],
+    groups: ['Users']
+};
+
+var leo = {
+    name: 'lblume',
+    groups: ['Users']
+};
+
+// Wait until the loading is complete
+loading.then(() =>
+{
+	// Batman is an admin
+    console.log(tp.hasGroup(batman, 'Administrators'));				// true
+
+	// Tony Start is not an admin
+    console.log(tp.hasGroup(stark, 'Administrators'));				// false
+
+	// Leo is a user
+    console.log(tp.hasGroup(leo, 'Users'));							// true
+});
+```
