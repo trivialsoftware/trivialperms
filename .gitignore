@@ -9,4 +9,5 @@ node_modules
 .idea
 
 # Build files
-dist
+dist/group.js
+dist/trivialperms.js

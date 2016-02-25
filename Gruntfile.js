@@ -36,6 +36,21 @@ module.exports = function(grunt)
                 }]
             }
         },
+        browserify: {
+            options: {
+                banner: "/* TrivialPermissions v" + require('./package').version + " */",
+                transform: [ ["babelify"] ],
+                plugin: [ ["minifyify", { map: false }] ],
+                browserifyOptions: {
+                    standalone: 'trivialperms'
+                }
+            },
+            web: {
+                files: {
+                    "dist/trivialperms.min.js": "src/trivialperms.js"
+                }
+            }
+        },
         watch: {
             index: {
                 files: ["src/**/*.js"],
@@ -59,10 +74,12 @@ module.exports = function(grunt)
     grunt.loadNpmTasks("grunt-babel");
     grunt.loadNpmTasks('grunt-contrib-clean');
     grunt.loadNpmTasks('grunt-contrib-watch');
+    grunt.loadNpmTasks("grunt-browserify");
     grunt.loadNpmTasks("gruntify-eslint");
 
     //------------------------------------------------------------------------------------------------------------------
 
+    grunt.registerTask("build-web", ["eslint", "clean", "browserify"]);
     grunt.registerTask("build-dev", ["eslint", "clean", "babel:dev"]);
     grunt.registerTask("build", ["eslint", "clean", "babel:prod"]);
     grunt.registerTask("default", ["build-dev", 'watch']);
