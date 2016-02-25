@@ -4,11 +4,24 @@
 /// @module
 //----------------------------------------------------------------------------------------------------------------------
 
-import _ from 'lodash';
+import map from 'lodash/map';
+import find from 'lodash/find';
+import some from 'lodash/some';
+import includes from 'lodash/includes';
+import isFunction from 'lodash/isFunction';
+
 import Promise from 'bluebird';
 import TPGroup from './group';
 
 //----------------------------------------------------------------------------------------------------------------------
+
+var _ = {
+    map,
+    find,
+    some,
+    includes,
+    isFunction
+};
 
 var mapping = { permissions: 'permissions', groups: 'groups' };
 
