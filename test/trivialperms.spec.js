@@ -4,16 +4,16 @@
 // @module trivialperms.spec.js
 // ---------------------------------------------------------------------------------------------------------------------
 
-var Promise = require('bluebird');
-var expect = require('chai').expect;
+const Promise = require('bluebird');
+const expect = require('chai').expect;
 
-var tp = require('../src/trivialperms');
+const tp = require('../src/trivialperms');
 
 // ---------------------------------------------------------------------------------------------------------------------
 
 describe('Permissions', () =>
 {
-    var batman, stark, leo;
+    let batman, stark, leo;
     beforeEach(() =>
     {
         batman = {
@@ -156,7 +156,7 @@ describe('Permissions', () =>
         it('supports setting the mapping of properties on the user object', () =>
         {
             tp.setUserMapping({ groups: 'roles' });
-            var user = {
+            const user = {
                 roles: ['Users']
             };
 
@@ -177,11 +177,19 @@ describe('Permissions', () =>
 
         it('returns false when checking the groups of a user if the group is not registered', () =>
         {
-            var user = {
+            const user = {
                 groups: ['Users', 'Fakes']
             };
 
             expect(tp.hasGroup(user, 'Fakes')).to.equal(false);
+        });
+
+        describe('#hasPerm()', () =>
+        {
+            it('can take the `Object/perm` form', () =>
+            {
+                expect(tp.hasPerm(stark, 'Posts/canEdit')).to.equal(true);
+            });
         });
     });
 });

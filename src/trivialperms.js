@@ -15,7 +15,7 @@ import TPGroup from './group';
 
 //----------------------------------------------------------------------------------------------------------------------
 
-var _ = {
+const _ = {
     map,
     find,
     some,
@@ -23,7 +23,7 @@ var _ = {
     isFunction
 };
 
-var mapping = { permissions: 'permissions', groups: 'groups' };
+const mapping = {permissions: 'permissions', groups: 'groups'};
 
 //----------------------------------------------------------------------------------------------------------------------
 
@@ -38,7 +38,7 @@ class TPManager
     {
         return !!_.find(user[mapping.permissions], (permission) =>
         {
-            if(permission == '*/*')
+            if(permission === '*/*')
             {
                 return true;
             }
@@ -74,7 +74,7 @@ class TPManager
             throw new Error("Must specify a 'name' property.");
         } // end if
 
-        var group = new TPGroup(groupDef.name, groupDef.permissions, this);
+        const group = new TPGroup(groupDef.name, groupDef.permissions, this);
         this.groups[groupDef.name] = group;
 
         return group;
@@ -82,7 +82,7 @@ class TPManager
 
     loadGroups(groupsOrFunc)
     {
-        var loadPromise = Promise.resolve(groupsOrFunc);
+        let loadPromise = Promise.resolve(groupsOrFunc);
         if(_.isFunction(groupsOrFunc))
         {
             loadPromise = groupsOrFunc();
@@ -97,10 +97,17 @@ class TPManager
 
     hasPerm(user, perm, obj)
     {
-        var found = this._userHasPerm(user, perm, obj);
+        if(arguments.length === 2)
+        {
+            const parts = perm.split('/');
+            obj = parts[0];
+            perm = parts[1];
+        } // end if
+
+        let found = this._userHasPerm(user, perm, obj);
         if(!found)
         {
-            var groups = _.map(user[mapping.groups], (name) => this.groups[name]);
+            const groups = _.map(user[mapping.groups], (name) => this.groups[name]);
             found = _.some(groups, (group) => group.hasPerm(perm, obj));
         } // end if
 

@@ -66,10 +66,10 @@ application.
 Defining an individual group is very simple:
 
 ```javascript
-var tp = require('../dist/trivialperms');
+const tp = require('../dist/trivialperms');
 
 // Create an 'Admins' group
-var admGroup = tp.defineGroup({ name: 'Admins', permissions: ['*/*'] });
+const admGroup = tp.defineGroup({ name: 'Admins', permissions: ['*/*'] });
 ```
 
 #### Loading Groups
@@ -81,7 +81,7 @@ More usefully, you will want to load multiple groups at once. TrivialPermissions
 (Note: You _will_ need to wait until after the loading promise resolves before attempting to use the permissions system.)
 
 ```javascript
-var tp = require('../dist/trivialperms');
+const tp = require('../dist/trivialperms');
 
 // Load from a list
 var loading = tp.loadGroups([
@@ -171,9 +171,9 @@ If your user object has it's permissions or groups under a different key name, y
 looks for using this method. Simply pass an object with the `permissions` and/or `groups` key(s) to map to your object's structure.
 
 ```javascript
-var tp = require('../dist/trivialperms');
+const tp = require('../dist/trivialperms');
 
-var user = {
+const user = {
 	name: "John Snow",
 	allowed: ["Foo/canView", "Bar/canView"],
 	roles: ["Posters"]
@@ -190,10 +190,10 @@ tp.setUserMapping({ permissions: 'allowed', groups: 'roles' });
 This is the heart of the system: checking permissions. It's very simply; you pass the user object, the permission descriptor (string), and the object descriptor (string). Here are a few examples:
 
 ```javascript
-var tp = require('../dist/trivialperms');
+const tp = require('../dist/trivialperms');
 
 // Setup
-var loading = tp.loadGroups([
+const loading = tp.loadGroups([
     {
         name: "Administrators",
         permissions: [
@@ -217,18 +217,18 @@ var loading = tp.loadGroups([
 ]);
 
 // Define Users
-var batman = {
+const batman = {
     name: 'batman',
     groups: ['Administrators']
 };
 
-var stark = {
+const stark = {
     name: 'tstark',
     permissions: ['*/*'],
     groups: ['Users']
 };
 
-var leo = {
+const leo = {
     name: 'lblume',
     groups: ['Users']
 };
@@ -260,10 +260,10 @@ about simply seeing if `groupName` is in the list of groups on the user: `hasGro
 not been defined, regardless of is the user has that group name in their list of groups.
 
 ```javascript
-var tp = require('../dist/trivialperms');
+const tp = require('../dist/trivialperms');
 
 // Setup
-var loading = tp.loadGroups([
+const loading = tp.loadGroups([
     {
         name: "Administrators",
         permissions: [
@@ -287,18 +287,18 @@ var loading = tp.loadGroups([
 ]);
 
 // Define Users
-var batman = {
+const batman = {
     name: 'batman',
     groups: ['Administrators']
 };
 
-var stark = {
+const stark = {
     name: 'tstark',
     permissions: ['*/*'],
     groups: ['Users']
 };
 
-var leo = {
+const leo = {
     name: 'lblume',
     groups: ['Users']
 };

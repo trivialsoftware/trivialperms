@@ -4,15 +4,15 @@
 // @module base.spec.js
 // ---------------------------------------------------------------------------------------------------------------------
 
-var expect = require('chai').expect;
+const expect = require('chai').expect;
 
-var TPGroup = require('../src/group').default;
+const TPGroup = require('../src/group').default;
 
 // ---------------------------------------------------------------------------------------------------------------------
 
 describe('Groups', () =>
 {
-    var groupInst, god;
+    let groupInst, god;
     beforeEach(() =>
     {
         groupInst = new TPGroup('test', [
@@ -38,6 +38,11 @@ describe('Groups', () =>
 
     describe('#hasPerm()', () =>
     {
+        it('can take the `Object/perm` form', () =>
+        {
+            expect(groupInst.hasPerm('Other/canEdit')).to.be.true;
+        });
+
         it('matches exact permissions', () =>
         {
             expect(groupInst.hasPerm('canEdit', 'Other')).to.be.true;

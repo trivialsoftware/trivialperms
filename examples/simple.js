@@ -4,13 +4,13 @@
 /// @module
 //----------------------------------------------------------------------------------------------------------------------
 
-var tp = require('../dist/trivialperms');
+const tp = require('../dist/trivialperms');
 
 //----------------------------------------------------------------------------------------------------------------------
 // Setup
 //----------------------------------------------------------------------------------------------------------------------
 
-var loading = tp.loadGroups([
+const loading = tp.loadGroups([
     {
         name: "Administrators",
         permissions: [
@@ -35,18 +35,18 @@ var loading = tp.loadGroups([
 
 // Define Users
 
-var batman = {
+const batman = {
     name: 'batman',
     groups: ['Administrators']
 };
 
-var stark = {
+const stark = {
     name: 'tstark',
     permissions: ['*/*'],
     groups: ['Users']
 };
 
-var leo = {
+const leo = {
     name: 'lblume',
     groups: ['Users']
 };
