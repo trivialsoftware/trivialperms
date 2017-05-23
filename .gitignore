@@ -7,7 +7,3 @@ node_modules
 
 # Jetbrains IDE project files
 .idea
-
-# Build files
-dist/group.js
-dist/trivialperms.js

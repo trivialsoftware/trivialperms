@@ -1,17 +1,17 @@
 //----------------------------------------------------------------------------------------------------------------------
-/// TrivialPerms
-///
-/// @module
+// TrivialPerms
+//
+// @module
 //----------------------------------------------------------------------------------------------------------------------
 
-import map from 'lodash/map';
-import find from 'lodash/find';
-import some from 'lodash/some';
-import includes from 'lodash/includes';
-import isFunction from 'lodash/isFunction';
+const map = require('lodash/map');
+const find = require('lodash/find');
+const some = require('lodash/some');
+const includes = require('lodash/includes');
+const isFunction = require('lodash/isFunction');
 
-import Promise from 'bluebird';
-import TPGroup from './group';
+const Promise = require('bluebird');
+const TPGroup = require('./group');
 
 //----------------------------------------------------------------------------------------------------------------------
 

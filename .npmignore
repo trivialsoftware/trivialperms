@@ -9,14 +9,13 @@ node_modules
 .idea
 
 # Build Files
-dist/trivialperms.min.js
+dist
 
-# Ignore source files
+# Ignore dev files
 .babelrc
 .editorconfig
 .gitignore
 **.yml
 Gruntfile.js
-src
 examples
 test

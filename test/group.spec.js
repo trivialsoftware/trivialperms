@@ -6,7 +6,7 @@
 
 const expect = require('chai').expect;
 
-const TPGroup = require('../src/group').default;
+const TPGroup = require('../src/group');
 
 // ---------------------------------------------------------------------------------------------------------------------
 
