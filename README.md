@@ -187,7 +187,9 @@ tp.setUserMapping({ permissions: 'allowed', groups: 'roles' });
 
 * `hasPerm(user, perm, object)` - Returns true if the user has that permission on that object, otherwise false.
 
-This is the heart of the system: checking permissions. It's very simply; you pass the user object, the permission descriptor (string), and the object descriptor (string). Here are a few examples:
+This is the heart of the system: checking permissions. It's very simply; you pass the user object, the permission 
+descriptor (string), and the object descriptor (string). (We also support passing in the same format as you define the 
+permissions, `'Object/perm'`.) Here are a few examples:
 
 ```javascript
 const tp = require('../dist/trivialperms');
@@ -238,6 +240,9 @@ loading.then(() =>
 {
     // Batman can edit posts
     console.log(tp.hasPerm(batman, 'canEdit', 'Posts'));			// true
+    
+    // Supports the single string form
+    console.log(tp.hasPerm(batman, 'Posts/canEdit'));				// true
     
     // Tony Start can do anything
     console.log(tp.hasPerm(stark, 'canEdit', 'Posts'));				// true
