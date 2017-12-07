@@ -9,6 +9,7 @@ const find = require('lodash/find');
 const some = require('lodash/some');
 const includes = require('lodash/includes');
 const isFunction = require('lodash/isFunction');
+const isUndefined = require('lodash/isUndefined');
 
 const Promise = require('bluebird');
 const TPGroup = require('./group');
@@ -20,7 +21,8 @@ const _ = {
     find,
     some,
     includes,
-    isFunction
+    isFunction,
+    isUndefined
 };
 
 const mapping = {permissions: 'permissions', groups: 'groups'};
@@ -97,7 +99,7 @@ class TPManager
 
     hasPerm(user, perm, obj)
     {
-        if(arguments.length === 2)
+        if(_.isUndefined(obj))
         {
             const parts = perm.split('/');
             obj = parts[0];
