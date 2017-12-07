@@ -189,7 +189,9 @@ describe('Permissions', () =>
             it('can take the `Object/perm` form', () =>
             {
                 expect(tp.hasPerm(leo, 'Posts/canView')).to.equal(true);
+                expect(tp.hasPerm(leo, 'Posts/canView', undefined)).to.equal(true);
                 expect(tp.hasPerm(leo, 'Posts/canEdit')).to.equal(false);
+                expect(tp.hasPerm(leo, 'Posts/canEdit', undefined)).to.equal(false);
             });
         });
     });
