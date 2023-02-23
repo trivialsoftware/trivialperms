@@ -1,6 +1,9 @@
 # Editor artifacts
 **.swp
 
+# Build Artifacts
+dist
+
 # NPM cruft
 node_modules
 **.log

@@ -1,0 +1,35 @@
+{
+    "compilerOptions": {
+        "incremental": true,
+        "declaration": true,
+        "tsBuildInfoFile": "dist/tsbuildinfo",
+        "target": "ES2020",
+        "module": "commonjs",
+        "outDir": "dist",
+        "rootDir": "src",
+        "strict": false,
+        "strictNullChecks": true,
+        "strictFunctionTypes": true,
+        "strictBindCallApply": true,
+        "strictPropertyInitialization": true,
+        "forceConsistentCasingInFileNames" : true,
+        "removeComments": true,
+        "noImplicitAny": false,
+        "alwaysStrict": true,
+        "noUnusedLocals": true,
+        "noUnusedParameters": true,
+        "noFallthroughCasesInSwitch": true,
+        "moduleResolution": "node",
+        "esModuleInterop": true,
+        "allowSyntheticDefaultImports": true,
+        "preserveSymlinks": true,
+        "sourceMap": true
+    },
+    "files": [
+        "src/examples/simple.ts",
+        "src/trivialperms.ts"
+    ],
+    "exclude": [
+        "node_modules"
+    ]
+}

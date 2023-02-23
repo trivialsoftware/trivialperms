@@ -1,11 +1,13 @@
 {
   "name": "trivialperms",
-  "version": "1.0.0",
+  "version": "2.0.0-alpha.1",
   "description": "A simple RBAC implementation that is datasource agnostic.",
-  "main": "./src/trivialperms.js",
+  "main": "./dist/trivialperms.js",
+  "types": "dist/trivialperms.d.ts",
   "scripts": {
-    "test": "mocha --reporter spec --recursive",
-    "version": "grunt build"
+    "prepublish": "npm run build",
+    "build": "tsc",
+    "test": "ts-mocha -p tsconfig.json test/**/*.spec.ts"
   },
   "keywords": [
     "json",
@@ -14,33 +16,24 @@
     "roles"
   ],
   "author": "Christopher S. Case <chris.case@g33xnexus.com>",
-  "bugs": "https://github.com/trivialsoftware/TrivialPermissions/issues",
-  "homepage": "http://trivialsoftware.github.io/TrvialPermissions/",
+  "bugs": "https://github.com/trivialsoftware/trivial-permissions/issues",
+  "homepage": "http://trivialsoftware.github.io/trivial-permissions/",
   "repository": {
     "type": "git",
-    "url": "https://github.com/trivialsoftware/TrivialPermissions.git"
+    "url": "https://github.com/trivialsoftware/trivial-permissions.git"
   },
   "license": "MIT",
   "engines": {
-    "node": ">=4.0.0"
-  },
-  "dependencies": {
-    "bluebird": "^3.3.1",
-    "lodash": "^4.5.1"
+    "node": ">=16.0.0"
   },
   "devDependencies": {
-    "babelify": "^7.2.0",
-    "babel-cli": "^6.2.0",
-    "babel-core": "^6.2.1",
-    "babel-preset-es2015": "^6.1.18",
-    "chai": "^3.5.0",
-    "grunt": "^0.4.5",
-    "grunt-cli": "^0.1.13",
-    "grunt-browserify": "^4.0.1",
-    "grunt-contrib-clean": "^0.7.0",
-    "grunt-contrib-watch": "^0.6.1",
-    "gruntify-eslint": "^2.0.0",
-    "minifyify": "^7.3.1",
-    "mocha": "~1.18.2"
+    "@types/chai": "^4.3.4",
+    "@types/mocha": "^10.0.1",
+    "@typescript-eslint/eslint-plugin": "^5.53.0",
+    "@typescript-eslint/parser": "^5.53.0",
+    "chai": "^4.3.7",
+    "mocha": "^10.2.0",
+    "ts-mocha": "^10.0.0",
+    "typescript": "^4.9.5"
   }
 }

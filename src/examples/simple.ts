@@ -1,16 +1,14 @@
 //----------------------------------------------------------------------------------------------------------------------
-/// Brief description for simple.js module.
-///
-/// @module
+// Example file
 //----------------------------------------------------------------------------------------------------------------------
 
-const tp = require('../dist/trivialperms');
+import tp from '../trivialperms';
 
 //----------------------------------------------------------------------------------------------------------------------
 // Setup
 //----------------------------------------------------------------------------------------------------------------------
 
-const loading = tp.loadGroups([
+tp.loadGroups([
     {
         name: "Administrators",
         permissions: [
@@ -51,21 +49,25 @@ const leo = {
     groups: ['Users']
 };
 
+const bender = {
+    name: 'benderIsGreat',
+    permissions: [ 'isGreat' ]
+}
+
 //----------------------------------------------------------------------------------------------------------------------
 // Use
 //----------------------------------------------------------------------------------------------------------------------
 
-loading.then(() =>
-{
-    console.log('Batman is an Administrator: ', tp.hasGroup(batman, 'Administrators'));
-    console.log('Batman can edit your posts: ', tp.hasPerm(batman, 'canEdit', 'Posts'));
+console.log('Batman is an Administrator:', tp.hasGroup(batman, 'Administrators'), '(expected: true)');
+console.log('Batman can edit your posts:', tp.hasPerm(batman, 'Posts/canEdit'), '(expected: true)');
 
-    console.log('Tony Stark is not an Administrator: ', !tp.hasGroup(stark, 'Administrators'));
-    console.log('Tony Stark can do anything: ', tp.hasPerm(stark, 'canGetAwayWith', 'Murder'));
+console.log('Tony Stark is an Administrator:', tp.hasGroup(stark, 'Administrators'), '(expected: false)');
+console.log('Tony Stark can do anything:', tp.hasPerm(stark, 'Murder/canGetAwayWith'), '(expected: true)');
 
-    console.log('Leo Blume is a user: ', tp.hasGroup(leo, 'Users'));
-    console.log('Leo Blume can read your posts: ', tp.hasPerm(leo, 'canView', 'Posts'));
-    console.log('Leo Blume can not edit your posts: ', !tp.hasPerm(leo, 'canEdit', 'Posts'));
-});
+console.log('Leo Blume is a user:', tp.hasGroup(leo, 'Users'), '(expected: true)');
+console.log('Leo Blume can read your posts:', tp.hasPerm(leo, 'Posts/canView'), '(expected: true)');
+console.log('Leo Blume can edit your posts:', tp.hasPerm(leo, 'Posts/canEdit'), '(expected: false)');
+
+console.log('Bender can do anything:', tp.hasPerm(bender, 'isGreat'), '(expected: true)');
 
 //----------------------------------------------------------------------------------------------------------------------

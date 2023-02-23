@@ -1,27 +1,28 @@
 // ---------------------------------------------------------------------------------------------------------------------
-// Unit Tests for the base.spec.js module.
-//
-// @module base.spec.js
+// Unit Tests for the TPGroup Class
 // ---------------------------------------------------------------------------------------------------------------------
 
-const expect = require('chai').expect;
-
-const TPGroup = require('../src/group');
+import { expect } from 'chai';
+import { TPGroup } from '../src/group';
 
 // ---------------------------------------------------------------------------------------------------------------------
 
-describe('Groups', () =>
+describe('TPGroup', () =>
 {
-    let groupInst, god;
+    let groupInst, god, godLegacy;
     beforeEach(() =>
     {
         groupInst = new TPGroup('test', [
             '*/canView',
-            'Default/*',
+            'canRock',
             'Other/canEdit'
         ]);
 
         god = new TPGroup('test', [
+            '*'
+        ]);
+
+        godLegacy = new TPGroup('test', [
             '*/*'
         ]);
     });
@@ -38,35 +39,35 @@ describe('Groups', () =>
 
     describe('#hasPerm()', () =>
     {
-        it('can take the `Object/perm` form', () =>
+        it('supports arbitrary strings for permission names', () =>
         {
+            expect(groupInst.hasPerm('canRock')).to.be.true;
             expect(groupInst.hasPerm('Other/canEdit')).to.be.true;
+            expect(groupInst.hasPerm('*/canView')).to.be.true;
         });
 
-        it('matches exact permissions', () =>
+        it('supports `*` matching any permission', () =>
         {
-            expect(groupInst.hasPerm('canEdit', 'Other')).to.be.true;
+            expect(god.hasPerm('canView')).to.be.true;
         });
 
         it('fails to match missing permissions', () =>
         {
-            expect(groupInst.hasPerm('canEdit', 'DNE')).to.be.false;
-            expect(groupInst.hasPerm('canWrite', 'Other')).to.be.false;
+            expect(groupInst.hasPerm('canEdit')).to.be.false;
+            expect(groupInst.hasPerm('Other/canWrite')).to.be.false;
         });
 
-        it('`*` matches any permission', () =>
+        describe('legacy support', () =>
         {
-            expect(groupInst.hasPerm('canWrite', 'Default')).to.be.true;
-        });
+            it('supports the legacy `*/perm` form in the group definition', () =>
+            {
+                expect(groupInst.hasPerm('canView')).to.be.true;
+            });
 
-        it('`*` matches any object', () =>
-        {
-            expect(groupInst.hasPerm('canView', 'DNE')).to.be.true;
-        });
-
-        it('`*/*` matches any permission on any object', () =>
-        {
-            expect(god.hasPerm('canView', 'DNE')).to.be.true;
+            it('supports the legacy `*/*` matching any permission in the group definition', () =>
+            {
+                expect(godLegacy.hasPerm('canView')).to.be.true;
+            });
         });
     });
 
@@ -74,17 +75,17 @@ describe('Groups', () =>
     {
         it('can add permissions', () =>
         {
-            groupInst.addPerm('canWrite', 'Other');
-            expect(groupInst.hasPerm('canWrite', 'Other')).to.be.true;
+            groupInst.addPerm('canWrite');
+            expect(groupInst.hasPerm('canWrite')).to.be.true;
         });
     });
 
-    describe('#removePerm', () =>
+    describe('#removePerm()', () =>
     {
         it('can remove permissions', () =>
         {
-            groupInst.removePerm('canEdit', 'Other');
-            expect(groupInst.hasPerm('canEdit', 'Other')).to.be.false;
+            groupInst.removePerm('Other/canEdit');
+            expect(groupInst.hasPerm('Other/canEdit')).to.be.false;
         });
     });
 });
