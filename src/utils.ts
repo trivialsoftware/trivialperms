@@ -12,9 +12,9 @@ export function checkPerm(permissions : string[], perm : string) : boolean
     return permissions.some((permission) =>
     {
         return permission === '*'
-            || permission === '*/*'             // Legacy form
-            || permission === `*/${ perm }`     // Legacy form
-            || permission === perm
+            || permission === '*/*' // Legacy form
+            || permission === `*/${ perm }` // Legacy form
+            || permission === perm;
     });
 }
 

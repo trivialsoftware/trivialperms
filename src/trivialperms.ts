@@ -15,7 +15,11 @@ class TPManager
 {
     groups : Map<string, TPGroup> = new Map();
 
-    _userHasPerm(user : TPUser, perm : string) : boolean
+    //------------------------------------------------------------------------------------------------------------------
+    // Internal
+    //------------------------------------------------------------------------------------------------------------------
+
+    private _userHasPerm(user : TPUser, perm : string) : boolean
     {
         return checkPerm(user.permissions ?? [], perm);
     }
@@ -37,7 +41,7 @@ class TPManager
         }
 
         const group = new TPGroup(groupDef.name, groupDef.permissions);
-        this.groups.set(groupDef.name,  group);
+        this.groups.set(groupDef.name, group);
 
         return group;
     }
@@ -76,7 +80,7 @@ class TPManager
             {
                 if(group)
                 {
-                    return group.hasPerm(perm)
+                    return group.hasPerm(perm);
                 }
 
                 return false;

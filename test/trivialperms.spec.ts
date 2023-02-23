@@ -10,59 +10,59 @@ import { TPGroupDef } from '../src/interfaces/group';
 
 describe('TrivialPermissions', () =>
 {
-    let batman, stark, mel, leo, azira, crowley;
+    let batman; let stark; let mel; let leo; let azira; let crowley;
     beforeEach(() =>
     {
         batman = {
             name: 'batman',
-            groups: ['Administrators']
+            groups: [ 'Administrators' ]
         };
 
         stark = {
             name: 'tstark',
-            permissions: ['*'],
-            groups: ['Users']
+            permissions: [ '*' ],
+            groups: [ 'Users' ]
         };
 
         leo = {
             name: 'lblume',
-            groups: ['Users']
+            groups: [ 'Users' ]
         };
 
         mel = {
             name: 'projektMelody',
-            groups: ['Users', 'Authors']
+            groups: [ 'Users', 'Authors' ]
         };
 
         azira = {
             name: 'aziraphale',
-            permissions: ['*/canView']
-        }
+            permissions: [ '*/canView' ]
+        };
 
         crowley = {
             name: 'bentleyLover666',
-            permissions: ['*/*']
-        }
+            permissions: [ '*/*' ]
+        };
 
         tp.loadGroups([
             {
-                name: "Administrators",
+                name: 'Administrators',
                 permissions: [
-                    "*"
+                    '*'
                 ]
             },
             {
-                name: "Authors",
+                name: 'Authors',
                 permissions: [
-                    "canViewPosts",
-                    "canAddPosts",
-                    "canEditPosts"
+                    'canViewPosts',
+                    'canAddPosts',
+                    'canEditPosts'
                 ]
             },
             {
-                name: "Users",
+                name: 'Users',
                 permissions: [
-                    "canViewPosts"
+                    'canViewPosts'
                 ]
             }
         ]);
@@ -79,7 +79,7 @@ describe('TrivialPermissions', () =>
         it('can define a group', () =>
         {
             tp.defineGroup({
-                name: "Test",
+                name: 'Test',
                 permissions: []
             });
 
@@ -88,7 +88,7 @@ describe('TrivialPermissions', () =>
 
         it('throws an error if your group does not have a `name` property', () =>
         {
-            function define()
+            function define() : void
             {
                 // WE ARE INTENTIONALLY BREAKING TYPESCRIPT TO TEST THIS
                 tp.defineGroup({} as unknown as TPGroupDef);
@@ -101,23 +101,23 @@ describe('TrivialPermissions', () =>
         {
             tp.loadGroups([
                 {
-                    name: "Test1",
+                    name: 'Test1',
                     permissions: [
-                        "*"
+                        '*'
                     ]
                 },
                 {
-                    name: "Test2",
+                    name: 'Test2',
                     permissions: [
-                        "canView",
-                        "canAdd",
-                        "canEdit"
+                        'canView',
+                        'canAdd',
+                        'canEdit'
                     ]
                 },
                 {
-                    name: "Test3",
+                    name: 'Test3',
                     permissions: [
-                        "canView"
+                        'canView'
                     ]
                 }
             ]);
@@ -149,7 +149,7 @@ describe('TrivialPermissions', () =>
         it('returns false when checking the groups of a user if the group is not registered', () =>
         {
             const user = {
-                groups: ['Users', 'Fakes']
+                groups: [ 'Users', 'Fakes' ]
             };
 
             expect(tp.hasGroup(user, 'Fakes')).to.equal(false);

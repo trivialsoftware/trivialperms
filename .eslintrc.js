@@ -14,7 +14,6 @@ module.exports = {
     },
     rules: {
         // Bad Practices
-        '@typescript-eslint/camelcase': 'on',
         '@typescript-eslint/no-explicit-any': 'off',
         'curly': 'error',
         'no-await-in-loop': 'error',

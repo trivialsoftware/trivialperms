@@ -9,7 +9,7 @@ import { TPGroup } from '../src/group';
 
 describe('TPGroup', () =>
 {
-    let groupInst, god, godLegacy;
+    let groupInst; let god; let godLegacy;
     beforeEach(() =>
     {
         groupInst = new TPGroup('test', [

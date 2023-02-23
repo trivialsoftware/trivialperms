@@ -7,7 +7,8 @@
   "scripts": {
     "prepublish": "npm run build",
     "build": "tsc",
-    "test": "ts-mocha -p tsconfig.json test/**/*.spec.ts"
+    "test": "ts-mocha -p tsconfig.json test/**/*.spec.ts",
+    "lint": "eslint --ext *.ts src/*.ts test/*.ts"
   },
   "keywords": [
     "json",
