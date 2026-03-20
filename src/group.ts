@@ -2,8 +2,8 @@
 // TPGroup
 //----------------------------------------------------------------------------------------------------------------------
 
-import { TPGroupDef } from './interfaces/group';
-import { checkPerm, uniq } from './utils';
+import { TPGroupDef } from './interfaces/group.js';
+import { checkPerm, uniq } from './utils.js';
 
 //----------------------------------------------------------------------------------------------------------------------
 

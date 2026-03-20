@@ -2,12 +2,12 @@
 // TrivialPerms
 //----------------------------------------------------------------------------------------------------------------------
 
-import { TPUser } from './interfaces/user';
-import { TPGroupDef } from './interfaces/group';
+import { TPUser } from './interfaces/user.js';
+import { TPGroupDef } from './interfaces/group.js';
 
-import { TPGroup } from './group';
+import { TPGroup } from './group.js';
 
-import { checkPerm } from './utils';
+import { checkPerm } from './utils.js';
 
 //----------------------------------------------------------------------------------------------------------------------
 

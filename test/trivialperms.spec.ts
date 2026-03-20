@@ -3,8 +3,8 @@
 // ---------------------------------------------------------------------------------------------------------------------
 
 import { expect } from 'chai';
-import tp from '../src/trivialperms';
-import { TPGroupDef } from '../src/interfaces/group';
+import tp from '../src/trivialperms.js';
+import { TPGroupDef } from '../src/interfaces/group.js';
 
 // ---------------------------------------------------------------------------------------------------------------------
 
