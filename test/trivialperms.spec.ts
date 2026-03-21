@@ -4,7 +4,7 @@
 
 import { expect } from 'chai';
 import tp from '../src/trivialperms.js';
-import { TPGroupDef } from '../src/interfaces/group.js';
+import type { TPGroupDef } from '../src/interfaces/group.js';
 
 // ---------------------------------------------------------------------------------------------------------------------
 

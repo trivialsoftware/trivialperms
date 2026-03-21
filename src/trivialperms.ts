@@ -2,8 +2,8 @@
 // TrivialPerms
 //----------------------------------------------------------------------------------------------------------------------
 
-import { TPUser } from './interfaces/user.js';
-import { TPGroupDef } from './interfaces/group.js';
+import type { TPUser } from './interfaces/user.js';
+import type { TPGroupDef } from './interfaces/group.js';
 
 import { TPGroup } from './group.js';
 
@@ -105,7 +105,7 @@ class TPManager
 
 //----------------------------------------------------------------------------------------------------------------------
 
-export { TPUser, TPGroupDef as TPGroup };
+export type { TPUser, TPGroupDef as TPGroup };
 
 export default new TPManager();
 
