@@ -1,22 +1,17 @@
 {
     "compilerOptions": {
         "declaration": true,
-        "target": "es2022",
+        "target": "esnext",
         "module": "nodenext",
         "outDir": "dist",
-        "strict": false,
-        "strictNullChecks": true,
-        "strictFunctionTypes": true,
-        "strictBindCallApply": true,
-        "strictPropertyInitialization": true,
-        "forceConsistentCasingInFileNames": true,
-        "noImplicitAny": false,
-        "alwaysStrict": true,
-        "noUnusedLocals": true,
-        "noUnusedParameters": true,
+        "erasableSyntaxOnly": true,
+
+        "strict": true,
         "noFallthroughCasesInSwitch": true,
-        "moduleResolution": "nodenext",
-        "allowSyntheticDefaultImports": true,
+        "noUncheckedIndexedAccess": true,
+        "noUncheckedSideEffectImports": true,
+
+        "skipLibCheck": true,
         "sourceMap": true
     },
     "files": [
