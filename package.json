@@ -7,8 +7,14 @@
   "module": "dist/esm/trivialperms.js",
   "exports": {
     ".": {
-      "require": "./dist/cjs/trivialperms.cjs",
-      "import": "./dist/esm/trivialperms.js"
+      "require": {
+        "types": "./dist/cjs/trivialperms.d.cts",
+        "default": "./dist/cjs/trivialperms.cjs"
+      },
+      "import": {
+        "types": "./dist/esm/trivialperms.d.ts",
+        "default": "./dist/esm/trivialperms.js"
+      }
     }
   },
   "files": [
