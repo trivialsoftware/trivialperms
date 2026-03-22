@@ -15,15 +15,15 @@ describe('TPGroup', () =>
         groupInst = new TPGroup('test', [
             '*/canView',
             'canRock',
-            'Other/canEdit'
+            'Other/canEdit',
         ]);
 
         god = new TPGroup('test', [
-            '*'
+            '*',
         ]);
 
         godLegacy = new TPGroup('test', [
-            '*/*'
+            '*/*',
         ]);
     });
 

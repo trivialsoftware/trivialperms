@@ -15,61 +15,62 @@ interface TestUser extends TPUser { name : string }
 
 describe('TrivialPermissions', () =>
 {
-    let batman : TestUser; let stark : TestUser; let mel : TestUser; let leo : TestUser; let azira : TestUser; let crowley : TestUser;
+    let batman : TestUser; let stark : TestUser; let mel : TestUser;
+    let leo : TestUser; let azira : TestUser; let crowley : TestUser;
     beforeEach(() =>
     {
         batman = {
             name: 'batman',
-            groups: [ 'Administrators' ]
+            groups: [ 'Administrators' ],
         };
 
         stark = {
             name: 'tstark',
             permissions: [ '*' ],
-            groups: [ 'Users' ]
+            groups: [ 'Users' ],
         };
 
         leo = {
             name: 'lblume',
-            groups: [ 'Users' ]
+            groups: [ 'Users' ],
         };
 
         mel = {
             name: 'projektMelody',
-            groups: [ 'Users', 'Authors' ]
+            groups: [ 'Users', 'Authors' ],
         };
 
         azira = {
             name: 'aziraphale',
-            permissions: [ '*/canView' ]
+            permissions: [ '*/canView' ],
         };
 
         crowley = {
             name: 'bentleyLover666',
-            permissions: [ '*/*' ]
+            permissions: [ '*/*' ],
         };
 
         tp.loadGroups([
             {
                 name: 'Administrators',
                 permissions: [
-                    '*'
-                ]
+                    '*',
+                ],
             },
             {
                 name: 'Authors',
                 permissions: [
                     'canViewPosts',
                     'canAddPosts',
-                    'canEditPosts'
-                ]
+                    'canEditPosts',
+                ],
             },
             {
                 name: 'Users',
                 permissions: [
-                    'canViewPosts'
-                ]
-            }
+                    'canViewPosts',
+                ],
+            },
         ]);
     });
 
@@ -85,7 +86,7 @@ describe('TrivialPermissions', () =>
         {
             tp.defineGroup({
                 name: 'Test',
-                permissions: []
+                permissions: [],
             });
 
             expect(tp.groups.get('Test')).to.not.be.undefined;
@@ -108,23 +109,23 @@ describe('TrivialPermissions', () =>
                 {
                     name: 'Test1',
                     permissions: [
-                        '*'
-                    ]
+                        '*',
+                    ],
                 },
                 {
                     name: 'Test2',
                     permissions: [
                         'canView',
                         'canAdd',
-                        'canEdit'
-                    ]
+                        'canEdit',
+                    ],
                 },
                 {
                     name: 'Test3',
                     permissions: [
-                        'canView'
-                    ]
-                }
+                        'canView',
+                    ],
+                },
             ]);
 
             expect(tp.groups.get('Test1')).to.not.be.undefined;
@@ -154,7 +155,7 @@ describe('TrivialPermissions', () =>
         it('returns false when checking the groups of a user if the group is not registered', () =>
         {
             const user = {
-                groups: [ 'Users', 'Fakes' ]
+                groups: [ 'Users', 'Fakes' ],
             };
 
             expect(tp.hasGroup(user, 'Fakes')).to.equal(false);

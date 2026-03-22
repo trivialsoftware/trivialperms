@@ -13,7 +13,7 @@ import { checkPerm } from './utils.js';
 
 class TPManager
 {
-    groups : Map<string, TPGroup> = new Map();
+    groups = new Map<string, TPGroup>();
 
     //------------------------------------------------------------------------------------------------------------------
     // Internal
